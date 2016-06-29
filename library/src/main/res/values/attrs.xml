@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <attr name="textSize" format="dimension" />
+    <attr name="textColor" format="color" />
+    <attr name="expandedText" format="string" />
+    <attr name="collapsedText" format="string" />
+    <attr name="trimLines" format="integer" />
+
+    <declare-styleable name="MoreTextView">
+        <attr name="expandedText" />
+        <attr name="collapsedText"/>
+        <attr name="trimLines" />
+        <attr name="textSize" />
+        <attr name="textColor" />
+    </declare-styleable>
+    <declare-styleable name="CollapsedTextView">
+        <attr name="expandedText" />
+        <attr name="collapsedText"/>
+        <attr name="trimLines" />
+    </declare-styleable>
+
+</resources>
