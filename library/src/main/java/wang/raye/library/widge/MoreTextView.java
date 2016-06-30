@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
-import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -23,61 +22,83 @@ import wang.raye.library.R;
  * Created by Raye on 2016/6/24.
  */
 public class MoreTextView extends LinearLayout {
-    /** TextView的实际高度*/
+    /**
+     * TextView的实际高度
+     */
     private int textViewHeight;
-    /** 默认全文的Text*/
+    /**
+     * 默认全文的Text
+     */
     private static final String EXPANDEDTEXT = "全文";
-    /** 默认收起的text*/
+    /**
+     * 默认收起的text
+     */
     private static final String COLLAPSEDTEXT = "收起";
-    /** 全文的text*/
-    private String expandedText ;
-    /** 收起的text*/
-    private String collapsedText ;
-    /** 字体大小*/
+    /**
+     * 全文的text
+     */
+    private String expandedText;
+    /**
+     * 收起的text
+     */
+    private String collapsedText;
+    /**
+     * 字体大小
+     */
     private int textSize;
-    /** 字体颜色*/
+    /**
+     * 字体颜色
+     */
     private int textColor;
-    /** 超过多少行出现全文、收起按钮*/
+    /**
+     * 超过多少行出现全文、收起按钮
+     */
     private int trimLines;
-    /** 显示文本的TextView */
+    /**
+     * 显示文本的TextView
+     */
     private TextView showTextView;
-    /** 全文和收起的TextView*/
+    /**
+     * 全文和收起的TextView
+     */
     private TextView collapseTextView;
-    /** 是否是收起状态，默认收起*/
+    /**
+     * 是否是收起状态，默认收起
+     */
     private boolean collapsed = true;
 
 
     public MoreTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     public MoreTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MoreTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
-    private void initView(Context context,AttributeSet attrs){
+    private void initView(Context context, AttributeSet attrs) {
         showTextView = new TextView(context);
         setOrientation(VERTICAL);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MoreTextView);
         textColor = typedArray.getColor(R.styleable.MoreTextView_textColor, Color.GRAY);
-        textSize = typedArray.getDimensionPixelSize(R.styleable.MoreTextView_textSize,14);
+        textSize = typedArray.getDimensionPixelSize(R.styleable.MoreTextView_textSize, 14);
         expandedText = typedArray.getString(R.styleable.MoreTextView_expandedText);
-        if(TextUtils.isEmpty(expandedText)){
+        if (TextUtils.isEmpty(expandedText)) {
             expandedText = EXPANDEDTEXT;
         }
         collapsedText = typedArray.getString(R.styleable.MoreTextView_collapsedText);
-        if(TextUtils.isEmpty(collapsedText)){
+        if (TextUtils.isEmpty(collapsedText)) {
             collapsedText = COLLAPSEDTEXT;
         }
-        trimLines = typedArray.getInt(R.styleable.MoreTextView_trimLines,0);
+        trimLines = typedArray.getInt(R.styleable.MoreTextView_trimLines, 0);
         typedArray.recycle();
         showTextView.setTextSize(textSize);
         showTextView.setTextColor(textColor);
@@ -86,10 +107,11 @@ public class MoreTextView extends LinearLayout {
 
     }
 
-    public void setText(CharSequence text){
+    public void setText(CharSequence text) {
         globalLayout();
         showTextView.setText(text);
     }
+
     /**
      * 获取控件实际高度，并设置最大行数
      */
@@ -104,25 +126,17 @@ public class MoreTextView extends LinearLayout {
                     obs.removeGlobalOnLayoutListener(this);
                 }
 
-                TextPaint tp = showTextView.getPaint();
-                int allWidth = (int) tp.measureText(showTextView.getText().toString());
-                //计算总行数
-                int allLine = allWidth / showTextView.getWidth();
+                int allLine = showTextView.getLineCount();
 
-                if(allWidth % showTextView.getWidth() == 0){
-                    textViewHeight = showTextView.getLineHeight() * allLine;
-                }else{
-                    allLine ++;
-                    textViewHeight = showTextView.getLineHeight() * allLine;
-                }
+                textViewHeight = showTextView.getLineHeight() * allLine;
 
-                if(trimLines > 0 && trimLines < allLine){
+                if (trimLines > 0 && trimLines < allLine) {
                     //需要全文和收起
-                    if(collapsed) {
+                    if (collapsed) {
                         showTextView.setHeight(showTextView.getLineHeight() * trimLines);
                     }
 
-                    if(collapseTextView == null) {
+                    if (collapseTextView == null) {
                         //全文和收起的textView
                         collapseTextView = new TextView(getContext());
                         collapseTextView.setTextSize(textSize);
@@ -146,13 +160,13 @@ public class MoreTextView extends LinearLayout {
         public void onClick(final View v) {
             v.setEnabled(false);
             final int startValue = showTextView.getHeight();
-            final int deltaValue ;
+            final int deltaValue;
 
-            if(collapsed){
+            if (collapsed) {
                 //是放大
                 deltaValue = textViewHeight - startValue;
 
-            }else{
+            } else {
                 deltaValue = showTextView.getLineHeight() * trimLines - startValue;
             }
             Animation animation = new Animation() {
@@ -171,7 +185,7 @@ public class MoreTextView extends LinearLayout {
                 public void onAnimationEnd(Animation animation) {
                     v.setEnabled(true);
                     collapsed = !collapsed;
-                    collapseTextView.setText(collapsed?expandedText:collapsedText);
+                    collapseTextView.setText(collapsed ? expandedText : collapsedText);
                 }
 
                 @Override
