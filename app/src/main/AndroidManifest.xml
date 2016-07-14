@@ -15,8 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MoreTextViewActivity"
-            android:label="MoreTextViewActivity"/>
+        <activity
+            android:name=".MoreTextViewActivity"
+            android:label="MoreTextViewActivity" />
+        <activity android:name=".CollapsedActivity"
+            android:label="CollapsedActivity"/>
     </application>
 
 </manifest>
