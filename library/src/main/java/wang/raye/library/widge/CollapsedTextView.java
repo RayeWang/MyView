@@ -85,6 +85,7 @@ public class CollapsedTextView extends TextView {
             if(TextUtils.isEmpty(collapsedText)){
                 collapsedText = COLLAPSEDTEXT;
             }
+            ta.recycle();
         }
 
     }
