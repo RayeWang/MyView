@@ -18,8 +18,11 @@
         <activity
             android:name=".MoreTextViewActivity"
             android:label="MoreTextViewActivity" />
-        <activity android:name=".CollapsedActivity"
-            android:label="CollapsedActivity"/>
+        <activity
+            android:name=".CollapsedActivity"
+            android:label="CollapsedActivity" />
+        <activity android:name=".AnimActivity"
+            android:label="AnimActivity"></activity>
     </application>
 
 </manifest>
