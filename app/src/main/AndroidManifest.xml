@@ -21,8 +21,17 @@
         <activity
             android:name=".CollapsedActivity"
             android:label="CollapsedActivity" />
-        <activity android:name=".AnimActivity"
-            android:label="AnimActivity"></activity>
+        <activity
+            android:name=".AnimActivity"
+            android:label="AnimActivity" />
+        <activity
+            android:name=".BinderActivity"
+            android:label="BinderActivity" />
+
+        <service
+            android:name=".services.BinderService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
