@@ -31,7 +31,10 @@
         <service
             android:name=".services.BinderService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".AsyncTastActivity"
+            android:label="AsyncTastActivity"></activity>
     </application>
 
 </manifest>
