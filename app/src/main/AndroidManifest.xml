@@ -28,13 +28,16 @@
             android:name=".BinderActivity"
             android:label="BinderActivity" />
 
+        <activity
+            android:name=".AsyncTastActivity"
+            android:label="AsyncTastActivity" />
+        <activity android:name=".NonRecursiveActivity"
+            android:label="NonRecursiveActivity" />
         <service
             android:name=".services.BinderService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".AsyncTastActivity"
-            android:label="AsyncTastActivity"></activity>
     </application>
 
 </manifest>
